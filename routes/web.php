@@ -16,3 +16,4 @@ Route::group(['prefix' => '/', 'middleware' => 'admin'], function () {
 });
 
 Route::get('/', [ClientHomeController::class, 'index'])->name('/');
+Route::get('/shop', [ClientHomeController::class, 'shop'])->name('shop');
