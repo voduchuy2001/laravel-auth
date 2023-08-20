@@ -39,7 +39,7 @@ class CartController extends Controller
                 'quantity' => $data['quantity'],
             ]);
 
-            toast('Added product!','success');
+            toast('Added product!', 'success');
 
             return redirect()->back();
         }
@@ -48,7 +48,7 @@ class CartController extends Controller
             'quantity' => $checkProductExits->quantity + $data['quantity'],
         ]);
 
-        toast('Added product!','success');
+        toast('Added product!', 'success');
 
         return redirect()->back();
     }
@@ -80,16 +80,16 @@ class CartController extends Controller
         }
 
         if ($data['type'] == 'dec') {
-           if ($product->quantity >= 2) {
-               $product->update([
-                   'quantity' => $product->quantity - 1,
-               ]);
+            if ($product->quantity >= 2) {
+                $product->update([
+                    'quantity' => $product->quantity - 1,
+                ]);
 
-               return response()->json([
-                   'message' => 'success',
-                   'data' => $product,
-               ]);
-           }
+                return response()->json([
+                    'message' => 'success',
+                    'data' => $product,
+                ]);
+            }
         }
 
         $product->delete();
@@ -106,7 +106,7 @@ class CartController extends Controller
 
         $product->delete();
 
-        toast('Deleted product!','success');
+        toast('Deleted product!', 'success');
 
         return redirect()->back();
     }
