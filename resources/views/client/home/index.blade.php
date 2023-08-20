@@ -108,12 +108,12 @@
                     <div class="item">
                         <div class="block-4 text-center">
                             <figure class="block-4-image">
-                                <img src="{{$product->productImage}}" alt="Image placeholder" class="img-fluid">
+                                <img src="{{ asset($product->image) }}" alt="{{ $product->name}}" class="img-fluid">
                             </figure>
                             <div class="block-4-text p-4">
-                                <h3><a href="#">{{$product->productName}}</a></h3>
-                                <p class="mb-0">{{$product->productDescription}}</p>
-                                <p class="text-primary font-weight-bold">${{$product->productPrice}}</p>
+                                <h3><a href="{{ route('shop.show', ['id' => $product->id]) }}">{{ $product->name }}</a></h3>
+                                <p class="mb-0">{{ $product->description }}</p>
+                                <p class="text-primary font-weight-bold">{{ $product->price }} VND</p>
                             </div>
                         </div>
                     </div>

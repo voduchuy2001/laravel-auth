@@ -3,21 +3,22 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
-use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    public function run(): void
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
+    public function run()
     {
-        Product::factory(20)->create();
+        // \App\Models\User::factory(10)->create();
 
-        // Product::factory()->create([
-        //     'name' => 'Product ' . random_int(1, 8),
-        //     'price' => random_int(100000, 500000),
-        //     'description' => fake()->name(),
-        //     'image' => 'upload/product-' . random_int(1, 8) . '.jpg',
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
         // ]);
     }
 }

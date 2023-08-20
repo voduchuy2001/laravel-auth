@@ -2,7 +2,6 @@
     <div class="site-navbar-top">
         <div class="container">
             <div class="row align-items-center">
-
                 <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
                     <form action="" class="site-block-top-search">
                         <span class="icon icon-search2"></span>
@@ -19,7 +18,7 @@
                 <div class="col-6 col-md-4 order-3 order-md-3 text-right">
                     <div class="site-top-icons">
                         <ul>
-                            @if (auth()->check())
+                            @if (Auth::check())
                             <li><a href="" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">Logout
 
@@ -29,14 +28,15 @@
                                 </a>
                             </li>
                             @else
-                            <li><a href="{{route("login")}}"><span class="icon icon-person"></span></a></li>
+                            <li><a href="{{ route("login") }}"><span class="icon icon-person"></span></a></li>
                             @endif
                             <li><a href="#"><span class="icon icon-heart-o"></span></a></li>
                             <li>
-                                <a href="cart.html" class="site-cart">
+                                @auth
+                                <a href="{{ route('cart.index') }}" class="site-cart">
                                     <span class="icon icon-shopping_cart"></span>
-                                    <span class="count">2</span>
                                 </a>
+                                @endauth
                             </li>
                             <li class="d-inline-block d-md-none ml-md-0"><a href="#"
                                     class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a>
@@ -44,7 +44,6 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -52,7 +51,7 @@
         <div class="container">
             <ul class="site-menu js-clone-nav d-none d-md-block">
                 <li><a href="/">Home</a></li>
-                <li><a href="{{route('shop')}}">Shop</a></li>
+                <li><a href="{{ route('shop.index') }}">Shop</a></li>
                 <li><a href="!#">News</a></li>
                 <li><a href="!#">Contact</a></li>
             </ul>
