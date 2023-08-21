@@ -18,6 +18,7 @@
         @include('client.layouts.topbar')
 
         @include('sweetalert::alert')
+
         @yield('content')
 
         @include('client.layouts.footer')

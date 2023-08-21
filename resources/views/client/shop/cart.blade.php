@@ -25,36 +25,43 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($products as $product)
-                                    <form id="formUpdateCart" action="{{ route('cart.update') }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
 
-                                        <tr>
-                                            <td class="product-thumbnail">
-                                                <img src="{{ asset($product->product->image) }}" alt="{{ $product->name }}" class="img-fluid">
-                                            </td>
-                                            <td class="product-name">
-                                                <h2 class="h5 text-black">{{ $product->product->name }}</h2>
-                                            </td>
-                                            <td>{{ number_format($product->product->price) }} VND</td>
-                                            <td>
-                                                <div class="input-group mb-3" style="max-width: 120px;">
-                                                    <div class="input-group-prepend">
-                                                        <button id="decrease" class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-                                                    </div>
-                                                    <input type="text" class="form-control text-center" name="quantity" value="{{ $product->quantity }}" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                                                    <div class="input-group-append">
-                                                        <button id="increase" class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-                                                    </div>
+                            <form hidden id="formUpdateCart" action="{{ route('cart.update') }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                            </form>
+
+                            @if(! $products->isEmpty())
+                                @foreach($products as $product)
+                                    <tr>
+                                        <td class="product-thumbnail">
+                                            <img src="{{ asset($product->product->image) }}" alt="{{ $product->name }}" class="img-fluid">
+                                        </td>
+                                        <td class="product-name">
+                                            <h2 class="h5 text-black">{{ $product->product->name }}</h2>
+                                        </td>
+                                        <td>{{ number_format($product->product->price) }} VND</td>
+                                        <td>
+                                            <div class="input-group mb-3" style="max-width: 120px;">
+                                                <div class="input-group-prepend">
+                                                    <button data-dec-product-id="{{ $product->id }}" id="decrease" class="decrease btn btn-outline-primary" type="button">&minus;</button>
                                                 </div>
-                                            </td>
-                                            <td>{{ number_format(($product->product->price * $product->quantity)) }} VND</td>
-                                            <td><a href="{{ route('cart.delete', ['id' => $product->id]) }}" onclick="alert('Are you sure to delete this product!')" class="btn btn-primary btn-sm">X</a></td>
-                                            <input type="text" hidden value="{{ $product->id }}" class="productId">
-                                        </tr>
-                                    </form>
+                                                <input type="text" class="form-control text-center" name="quantity" value="{{ $product->quantity }}" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                                <div class="input-group-append">
+                                                    <button data-inc-product-id="{{ $product->id }}" id="increase" class="increase btn btn-outline-primary" type="button">&plus;</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>{{ number_format(($product->product->price * $product->quantity)) }} VND</td>
+                                        <td><a href="{{ route('cart.delete', ['id' => $product->id]) }}" onclick="alert('Are you sure to delete this product!')" class="btn btn-primary btn-sm">X</a></td>
+                                        <input type="text" hidden value="{{ $product->id }}" class="productId">
+                                    </tr>
                                 @endforeach
+                            @else
+                                <tr class="text-center">
+                                    <td colspan="100%">Not have items</td>
+                                </tr>
+                            @endif
                             </tbody>
                         </table>
                     </div>
@@ -66,11 +73,11 @@
 
 @section('scripts')
     <script type="text/javascript">
-        $('#increase').on('click', function(e) {
+        $('.increase').on('click', function(e) {
             e.preventDefault()
 
             let url = $('#formUpdateCart').attr('action');
-            let id = $('.productId').val();
+            let id = $(this).data('inc-product-id');
 
             $.ajax({
                 url: url,
@@ -90,12 +97,14 @@
                 }
             })
         });
+    </script>
 
-        $('#decrease').on('click', function(e) {
+    <script type="text/javascript">
+        $('.decrease').on('click', function(e) {
             e.preventDefault()
 
             let url = $('#formUpdateCart').attr('action');
-            let id = $('.productId').val();
+            let id = $(this).data('dec-product-id');
 
             $.ajax({
                 url: url,
