@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @include('client.layouts.css')
-
+    @livewireStyles
 </head>
 
 <body>
@@ -25,7 +25,7 @@
     </div>
 
     @include('client.layouts.js')
-
+    @livewireScripts
 </body>
 
 </html>

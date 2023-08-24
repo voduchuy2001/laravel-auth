@@ -66,6 +66,12 @@
                         </table>
                     </div>
                 </div>
+
+                @if(! $products->isEmpty())
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <a href="{{ route('checkout.index') }}" class="btn btn-primary btn-sm btn-block">Checkout</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

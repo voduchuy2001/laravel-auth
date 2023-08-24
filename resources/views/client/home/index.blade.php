@@ -113,7 +113,7 @@
                             <div class="block-4-text p-4">
                                 <h3><a href="{{ route('shop.show', ['id' => $product->id]) }}">{{ $product->name }}</a></h3>
                                 <p class="mb-0">{{ $product->description }}</p>
-                                <p class="text-primary font-weight-bold">{{ $product->price }} VND</p>
+                                <p class="text-primary font-weight-bold">{{ number_format($product->price) }} VND</p>
                             </div>
                         </div>
                     </div>
